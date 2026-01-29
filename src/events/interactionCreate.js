@@ -13,22 +13,22 @@ module.exports = {
         const command = interaction.client.commands.get(interaction.commandName);
 
         if (!command) {
-          console.error(`No command matching ${interaction.commandName} was found.`);
+          console.error(`ไม่มีคำสั่งที่ตรงกัน ${interaction.commandName} พบว่า.`);
           return;
         }
 
         try {
           await command.execute(interaction);
         } catch (error) {
-          console.error(`Error executing ${interaction.commandName}`);
+          console.error(`เกิดข้อผิดพลาดในการดำเนินการ ${interaction.commandName}`);
           console.error(error);
           
           try {
             if (interaction.replied || interaction.deferred) {
               await interaction.followUp({ 
                 embeds: [createErrorEmbed(
-                  'Command Error', 
-                  'There was an error while executing this command!',
+                  'ข้อผิดพลาดของคำสั่ง', 
+                  'เกิดข้อผิดพลาดขณะดำเนินการคำสั่งนี้!',
                   error.message
                 )],
                 ephemeral: true 
@@ -36,15 +36,15 @@ module.exports = {
             } else {
               await interaction.reply({ 
                 embeds: [createErrorEmbed(
-                  'Command Error', 
-                  'There was an error while executing this command!',
+                  'ข้อผิดพลาดของคำสั่ง', 
+                  'เกิดข้อผิดพลาดขณะดำเนินการคำสั่งนี้!',
                   error.message
                 )],
                 ephemeral: true 
               });
             }
           } catch (replyError) {
-            console.error(`Failed to send error response for command ${interaction.commandName}:`, replyError);
+            console.error(`ไม่สามารถส่งการตอบกลับข้อผิดพลาดสำหรับคำสั่งได้ ${interaction.commandName}:`, replyError);
             // At this point, we can't do anything more with this interaction
           }
         }
@@ -55,15 +55,15 @@ module.exports = {
         try {
           await handleButtonInteraction(interaction);
         } catch (error) {
-          console.error(`Error handling button interaction: ${interaction.customId}`);
+          console.error(`การจัดการข้อผิดพลาด การโต้ตอบปุ่ม: ${interaction.customId}`);
           console.error(error);
           
           try {
             if (interaction.replied || interaction.deferred) {
               await interaction.followUp({ 
                 embeds: [createErrorEmbed(
-                  'Button Error', 
-                  'There was an error while processing this interaction!',
+                  'ข้อผิดพลาดของปุ่ม', 
+                  'เกิดข้อผิดพลาดขณะประมวลผลการโต้ตอบนี้!',
                   error.message
                 )],
                 ephemeral: true 
@@ -71,15 +71,15 @@ module.exports = {
             } else {
               await interaction.reply({ 
                 embeds: [createErrorEmbed(
-                  'Button Error', 
-                  'There was an error while processing this interaction!',
+                  'ข้อผิดพลาดของปุ่ม', 
+                  'เกิดข้อผิดพลาดขณะประมวลผลการโต้ตอบนี!',
                   error.message
                 )],
                 ephemeral: true 
               });
             }
           } catch (replyError) {
-            console.error(`Failed to send error response for button ${interaction.customId}:`, replyError);
+            console.error(`ไม่สามารถส่งการตอบกลับข้อผิดพลาดสำหรับปุ่มได้ ${interaction.customId}:`, replyError);
             // At this point, we can't do anything more with this interaction
           }
         }
@@ -93,15 +93,15 @@ module.exports = {
             await handleSelectMenuInteraction(interaction);
           }
         } catch (error) {
-          console.error(`Error handling select menu interaction: ${interaction.customId}`);
+          console.error(`การจัดการข้อผิดพลาดในการเลือกเมนูโต้ตอบn: ${interaction.customId}`);
           console.error(error);
           
           try {
             if (interaction.replied || interaction.deferred) {
               await interaction.followUp({ 
                 embeds: [createErrorEmbed(
-                  'Selection Error', 
-                  'There was an error while processing your selection!',
+                  'ข้อผิดพลาดในการเลือก', 
+                  'เกิดข้อผิดพลาดขณะประมวลผลการเลือกของคุณ!',
                   error.message
                 )],
                 ephemeral: true 
@@ -109,15 +109,15 @@ module.exports = {
             } else {
               await interaction.reply({ 
                 embeds: [createErrorEmbed(
-                  'Selection Error', 
-                  'There was an error while processing your selection!',
+                  'ข้อผิดพลาดในการเลือก', 
+                  'เกิดข้อผิดพลาดขณะประมวลผลการเลือกของคุณ!',
                   error.message
                 )],
                 ephemeral: true 
               });
             }
           } catch (replyError) {
-            console.error(`Failed to send error response for select menu ${interaction.customId}:`, replyError);
+            console.error(`ไม่สามารถส่งการตอบกลับข้อผิดพลาดสำหรับเมนูที่เลือกได้ ${interaction.customId}:`, replyError);
             // At this point, we can't do anything more with this interaction
           }
         }
@@ -128,15 +128,15 @@ module.exports = {
         try {
           await handleModalSubmit(interaction);
         } catch (error) {
-          console.error(`Error handling modal submission: ${interaction.customId}`);
+          console.error(`การจัดการข้อผิดพลาดในการส่งโมดอล: ${interaction.customId}`);
           console.error(error);
           
           try {
             if (interaction.replied || interaction.deferred) {
               await interaction.followUp({ 
                 embeds: [createErrorEmbed(
-                  'Submission Error', 
-                  'There was an error while processing your submission!',
+                  'ข้อผิดพลาดในการส่งข้อมูล', 
+                  'เกิดข้อผิดพลาดระหว่างการประมวลผลการส่งข้อมูลของคุณ!',
                   error.message
                 )],
                 ephemeral: true 
@@ -144,36 +144,36 @@ module.exports = {
             } else {
               await interaction.reply({ 
                 embeds: [createErrorEmbed(
-                  'Submission Error', 
-                  'There was an error while processing your submission!',
+                  'ข้อผิดพลาดในการส่งข้อมูล', 
+                  'เกิดข้อผิดพลาดขณะประมวลผลการส่งข้อมูลของคุณ!',
                   error.message
                 )],
                 ephemeral: true 
               });
             }
           } catch (replyError) {
-            console.error(`Failed to send error response for modal ${interaction.customId}:`, replyError);
+            console.error(`ไม่สามารถส่งการตอบกลับข้อผิดพลาดสำหรับโมดอลได้ ${interaction.customId}:`, replyError);
             // At this point, we can't do anything more with this interaction
           }
         }
       }
     } catch (globalError) {
       // Global error handler for any unexpected errors
-      console.error('Unhandled error in interaction handler:', globalError);
+      console.error('ข้อผิดพลาดที่ไม่ได้จัดการในตัวจัดการปฏิสัมพันธ์:', globalError);
       
       try {
         if (!interaction.replied && !interaction.deferred) {
           await interaction.reply({ 
             embeds: [createErrorEmbed(
-              'Unexpected Error', 
-              'An unexpected error occurred while processing your interaction. Please try again later.',
+              'ข้อผิดพลาดที่ไม่คาดคิด', 
+              'เกิดข้อผิดพลาดที่ไม่คาดคิดขณะประมวลผลการโต้ตอบของคุณ โปรดลองใหม่อีกครั้งในภายหลัง.',
               globalError.message
             )],
             ephemeral: true 
           });
         }
       } catch (finalError) {
-        console.error('Failed to send final error response:', finalError);
+        console.error('ไม่สามารถส่งการตอบกลับข้อผิดพลาดขั้นสุดท้ายได้:', finalError);
       }
     }
   }
