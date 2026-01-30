@@ -10,7 +10,7 @@ const { verifySetup, cleanupInvalidSetup } = require('../utils/setupHandler');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('Noop')
+    .setName('setup')
     .setDescription('ตั้งค่าระบบช่องสัญญาณเสียงชั่วคราว')
     .addStringOption(option =>
       option.setName('อินเทอร์เฟซ')
