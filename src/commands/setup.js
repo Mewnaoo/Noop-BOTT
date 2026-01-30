@@ -10,15 +10,15 @@ const { verifySetup, cleanupInvalidSetup } = require('../utils/setupHandler');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('setup')
-    .setDescription('Set up the temporary voice channels system')
+    .setName('Noop')
+    .setDescription('ตั้งค่าระบบช่องสัญญาณเสียงชั่วคราว')
     .addStringOption(option =>
-      option.setName('interface')
-        .setDescription('The interface type to use')
+      option.setName('อินเทอร์เฟซ')
+        .setDescription('ประเภทของอินเทอร์เฟซที่จะใช้')
         .setRequired(false)
         .addChoices(
-          { name: 'Original', value: 'original' },
-          { name: 'Standard', value: 'standard' }
+          { name: 'ต้นฉบับ', value: 'original' },
+          { name: 'มาตรฐาน', value: 'standard' }
         )
     )
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
@@ -28,8 +28,8 @@ module.exports = {
     if (!interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
       return interaction.reply({
         embeds: [createErrorEmbed(
-          'Permission Denied', 
-          'You need Administrator permissions to use this command.'
+          'ไม่ได้รับอนุญาต', 
+          'คุณต้องมีสิทธิ์ผู้ดูแลระบบจึงจะสามารถใช้คำสั่งนี้ได้.'
         )],
         ephemeral: true
       });
@@ -43,8 +43,8 @@ module.exports = {
     if (setupStatus.valid) {
       return interaction.editReply({
         embeds: [createInfoEmbed(
-          'Already Set Up', 
-          'TempVoice is already set up in this server.',
+          'ตั้งค่าเรียบร้อยแล้ว', 
+          'Noop ได้ถูกตั้งค่าไว้ในเซิร์ฟเวอร์นี้เรียบร้อยแล้ว.',
           [
             { 
               name: 'Current Setup', 
@@ -61,8 +61,8 @@ module.exports = {
         await cleanupInvalidSetup(interaction.guild);
         await interaction.editReply({
           embeds: [createWarningEmbed(
-            'Invalid Setup Cleaned', 
-            `Previous setup was invalid (${setupStatus.reason}). It has been cleaned up. Please run the command again to set up TempVoice.`
+            'การตั้งค่าที่ไม่ถูกต้องถูกล้างออกแล้ว', 
+            `การตั้งค่าก่อนหน้านี้ไม่ถูกต้อง (${setupStatus.reason}). ระบบได้ทำการล้างข้อมูลเรียบร้อยแล้ว โปรดเรียกใช้คำสั่งอีกครั้งเพื่อตั้งค่า Noop.`
           )],
           ephemeral: true
         });
