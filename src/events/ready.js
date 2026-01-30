@@ -7,12 +7,12 @@ module.exports = {
     // Connect to MongoDB
     await connectToDatabase();
     
-    console.log(`Ready! Logged in as ${client.user.tag}`);
+    console.log(`พร้อมแล้ว! เข้าสู่ระบบในฐานะ ${client.user.tag}`);
     
     // Set bot status
     client.user.setPresence({
-      activities: [{ name: 'Temporary Voice Channels', type: 2 }],
-      status: 'online'
+      activities: [{ name: 'Noop Bot', type: 2 }],
+      status: 'ออนไลน์'
     });
   }
 }; 
